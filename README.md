@@ -1,5 +1,5 @@
 # iOSDebugLog
-iOSのApp"ファイル"より確認できるログのレポジトリ
+iOSのApp"ファイル"より確認できるログ
 
 ## 利用方法
 #### 1.iOSDebugLog⁩ ▸ ⁨iOSDebugLog⁩ ▸ ⁨DocumentLog の中身を自分のプロジェクトにコピー
