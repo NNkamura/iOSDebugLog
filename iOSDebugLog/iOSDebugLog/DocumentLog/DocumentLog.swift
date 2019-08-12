@@ -54,10 +54,14 @@ import UIKit
         return
     }
     
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = dateFormat
-    let now = Date()
-    let fileName = titleName + "_" + dateFormatter.string(from: now)
+    var fileName = titleName
+    if isAddDate {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        let now = Date()
+        fileName += "_" + dateFormatter.string(from: now)
+    }
+    
     let checkfilePath = statusPath + "/" + fileName + textStr
     
     if !fmDefault.fileExists(atPath: checkfilePath) {
@@ -68,16 +72,24 @@ import UIKit
         // 同名ファイルがある時、後ろに数字をつけて作成
         var num = 2
         var addNumFilePath = statusPath + "/" + fileName + "(\(num))" + textStr
-        // 数字をつけても同名ファイルがある時、数字を足して作成。100件あったら諦める。
-        while (fmDefault.fileExists(atPath: addNumFilePath) || (num > 99)) {
+        // 同名ファイルがあり、100件未満の時、数字を足して再作成。
+        // 同名ファイルがないか、100件すでにあるならループから外れる
+        while (fmDefault.fileExists(atPath: addNumFilePath) && (num < 100)) {
             num += 1
             addNumFilePath = statusPath + "/"  + fileName + "(\(num))" + textStr
             if num > 99 {
-                print("既に100件の同名ファイルが存在します。テキストファイルの作成は行われません。")
+                break
             }
         }
-        fmDefault.createFile(atPath: addNumFilePath, contents: outputData, attributes: [FileAttributeKey.creationDate:Date(),
-                                                                                  FileAttributeKey.modificationDate:Date()])
+        // 同名ファイルがない時、ファイルを作成
+        if !fmDefault.fileExists(atPath: addNumFilePath){
+            fmDefault.createFile(atPath: addNumFilePath, contents: outputData, attributes: [FileAttributeKey.creationDate:Date(),
+                                                                                            FileAttributeKey.modificationDate:Date()])
+        }else{
+            // 同名ファイルがある時、同名ファイルが100件以上ある。
+            print("既に100件の同名ファイルが存在します。テキストファイルの作成は行われません。")
+            
+        }
     }
 }
 
