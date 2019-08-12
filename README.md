@@ -10,7 +10,7 @@ DocumentLog(titleName: "Title", status: .info, contents: [])
 
 #### 3.info.plistに下記項目を追加、trueに設定する
 Supports opening documents in place  
-Application supports iTunes file sharing
+Application supports iTunes file sharing  
 参考:"info.plist設定.png"
 
 ## 確認方法
