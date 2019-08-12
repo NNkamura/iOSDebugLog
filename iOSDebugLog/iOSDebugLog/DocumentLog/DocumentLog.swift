@@ -18,11 +18,11 @@ import UIKit
 ///   - status: 用途分け、保存するフォルダが変わる
 ///   - contents: テキストの内容。配列の行が変わると改行する
 @inlinable public func DocumentLog(titleName:String,
-    _ isAddDate:Bool = true,
-    _ addFileName:String = #file,
-    _ addFuncName:String = #function,
-    _ addLineNo:Int = #line,
-    _ description:String = "",
+    isAddDate:Bool = true,
+    addFileName:String = #file,
+    addFuncName:String = #function,
+    addLineNo:Int = #line,
+    description:String = "",
     status:LogStatus,
     contents:[Any]) {
     
